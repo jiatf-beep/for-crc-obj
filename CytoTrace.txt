@@ -1,0 +1,19 @@
+library(Seurat)
+library(RColorBrewer)
+library(slingshot)
+library(SingleCellExperiment)
+library(ggsci)
+library(paletteer)  
+library(ggplot2)
+library(CytoTRACE)
+  phe <- Idents(sce)
+  phe = as.character(phe)
+  names(phe) <- rownames(sce@meta.data)
+  mat_3k <- as.matrix(sce@assays$RNA@counts)
+  mat_3k[1:4,1:4]
+  results <- CytoTRACE(mat = mat_3k)
+dir.create('F:/rds-liu/10.7/result3.0/')
+plotCytoTRACE(results, phenotype = phe,outputDir = 'F:/rds-liu/10.7/result3.0/')
+plotCytoGenes(results, numOfGenes = 10,outputDir = 'F:/rds-liu/10.7/result3.0/')
+
+
